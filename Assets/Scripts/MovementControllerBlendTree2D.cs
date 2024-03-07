@@ -11,7 +11,8 @@ public class MovementControllerBlendTree2D : MonoBehaviour
     public float rotationSpeed = 100.0f; // Speed of rotation
     private CharacterController characterController;
     private Animator animatorController;
-
+    public CinemachineVirtualCamera camaFrente;
+    public CinemachineVirtualCamera camaArriba;
   
 
     void Start()
@@ -20,6 +21,7 @@ public class MovementControllerBlendTree2D : MonoBehaviour
         // Get the Character Controller on the player
         characterController = GetComponent<CharacterController>();
         animatorController = GetComponent<Animator>();
+        //GetComponent<CinemachineBrain>().
     }
 
     void Update()
@@ -46,5 +48,21 @@ public class MovementControllerBlendTree2D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)) animatorController.SetFloat("OC", 0f);
 
 
+        if (Input.GetKeyDown(KeyCode.P)) changeCamera();
+
+    }
+
+    public void changeCamera()
+    {
+        if (camaArriba.Priority == 0)
+        {
+            camaArriba.Priority = 1;
+            camaFrente.Priority = 0;
+        }
+        else
+        {
+            camaArriba.Priority = 0;
+            camaFrente.Priority = 1;
+        }
     }
 }
